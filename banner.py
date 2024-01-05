@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""the tool banners"""
 banner: list = [
     r"""
   _______        __       ____  ____   ___________    __    __   
