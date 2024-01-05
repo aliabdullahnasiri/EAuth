@@ -7,7 +7,6 @@ from typing import Dict, Literal, Union
 import requests
 import urllib3
 from bs4 import BeautifulSoup
-from requests.cookies import cookiejar_from_dict
 from rich.console import Console
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
