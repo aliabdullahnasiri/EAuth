@@ -86,14 +86,16 @@ def validate_parameter(ctx: click.Context, _: click.Parameter, value: str) -> st
     )
 
 
-def parse_proxy(ctx: click.Context, param: click.Parameter, value: str) -> dict:
+def parse_proxy(
+    ctx: click.Context, param: click.Parameter, value: Union[str, None]
+) -> dict:
     """
     Parse and validate proxy information.
 
     Args:
         ctx (click.Context): The Click context.
         param (click.Parameter): The Click parameter.
-        value (str): The proxy information to parse.
+        value (Union[str, None]): The proxy information to parse.
 
     Returns:
         dict: A dictionary containing proxy information.
@@ -103,13 +105,16 @@ def parse_proxy(ctx: click.Context, param: click.Parameter, value: str) -> dict:
             Example: "Invalid proxy format! Please provide a valid proxy in the form of host:port."
 
     """
-    proxy_pattern = re.compile(r"^[a-zA-Z0-9_.-]+:\d+$")
-    if re.match(proxy_pattern, value):
-        return {"http": value, "https": value}
+    if value:
+        proxy_pattern = re.compile(r"^[a-zA-Z0-9_.-]+:\d+$")
+        if re.match(proxy_pattern, value):
+            return {"http": value, "https": value}
 
-    raise click.exceptions.ClickException(
-        "Invalid proxy format! Please provide a valid proxy in the form of host:port."
-    )
+        raise click.exceptions.ClickException(
+            "Invalid proxy format! Please provide a valid proxy in the form of host:port."
+        )
+    else:
+        return {}
 
 
 def parse_cookies(
