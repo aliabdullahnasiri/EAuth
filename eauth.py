@@ -2,6 +2,7 @@
 """Module for EAuth class"""
 
 import re
+from copy import deepcopy
 from typing import Dict, Literal, Union
 
 import requests
@@ -120,12 +121,14 @@ class EAuth:
                 csrf = {self.csrf: csrf_input}
                 self.data |= csrf
 
+        data = deepcopy(self.data)
+
         if self.parameter and self.parameter in self.data:
-            self.data[self.parameter] = f"{self.data[self.parameter]}{self.payload}"
+            data[self.parameter] = f"{data[self.parameter]}{self.payload}"
         else:
             raise ValueError(f"Invalid injectable parameter: {self.parameter!r}")
 
-        kwargs.setdefault("data", self.data)
+        kwargs.setdefault("data", data)
         if self.method == "POST":
             response = self.session.post(**kwargs)
         elif self.method == "GET":
