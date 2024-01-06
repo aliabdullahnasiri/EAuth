@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import re
+from typing import Union
 
 import click
 
@@ -111,14 +112,16 @@ def parse_proxy(ctx: click.Context, param: click.Parameter, value: str) -> dict:
     )
 
 
-def parse_cookies(ctx: click.Context, param: click.Parameter, value: str) -> dict:
+def parse_cookies(
+    ctx: click.Context, param: click.Parameter, value: Union[str, None]
+) -> dict:
     """
     Parse and validate cookie information.
 
     Args:
         ctx (click.Context): The Click context.
         param (click.Parameter): The Click parameter.
-        value (str): The cookie information to parse.
+        value (Union[str, Noun]): The cookie information to parse.
 
     Returns:
         dict: A dictionary containing cookie information.
@@ -128,10 +131,13 @@ def parse_cookies(ctx: click.Context, param: click.Parameter, value: str) -> dic
             Example: "Invalid cookies format 'example'! Please provide valid cookies."
 
     """
-    cookies_pattern = re.compile(r"^([a-zA-Z0-9_]+=[^;]+)(; [a-zA-Z0-9_]+=[^;]+)*$")
-    if re.match(cookies_pattern, value):
-        return dict(data.strip().split("=") for data in value.split(";"))
+    if value:
+        cookies_pattern = re.compile(r"^([a-zA-Z0-9_]+=[^;]+)(; [a-zA-Z0-9_]+=[^;]+)*$")
+        if re.match(cookies_pattern, value):
+            return dict(data.strip().split("=") for data in value.split(";"))
 
-    raise click.exceptions.ClickException(
-        f"Invalid cookies format {value!r}! Please provide valid cookies."
-    )
+        raise click.exceptions.ClickException(
+            f"Invalid cookies format {value!r}! Please provide valid cookies."
+        )
+    else:
+        return {}
