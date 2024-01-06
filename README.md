@@ -1,4 +1,17 @@
 # EAuth
+```
+      ___           ___           ___           ___           ___
+     /\  \         /\  \         /\__\         /\  \         /\__\
+    /::\  \       /::\  \       /:/  /         \:\  \       /:/  /
+   /:/\:\  \     /:/\:\  \     /:/  /           \:\  \     /:/__/
+  /::\~\:\  \   /::\~\:\  \   /:/  /  ___       /::\  \   /::\  \ ___
+ /:/\:\ \:\__\ /:/\:\ \:\__\ /:/__/  /\__\     /:/\:\__\ /:/\:\  /\__\
+ \:\~\:\ \/__/ \/__\:\/:/  / \:\  \ /:/  /    /:/  \/__/ \/__\:\/:/  /
+  \:\ \:\__\        \::/  /   \:\  /:/  /    /:/  /           \::/  /
+   \:\ \/__/        /:/  /     \:\/:/  /     \/__/            /:/  /
+    \:\__\         /:/  /       \::/  /                      /:/  /
+     \/__/         \/__/         \/__/                       \/__/
+```
 
 The "Authentication Exploit Toolkit" is a Python-based project designed to simplify the exploration and exploitation of authentication vulnerabilities in web applications. This toolkit comprises two main modules: eauth.py and exploit.py, along with a utility module callback.py.
 
